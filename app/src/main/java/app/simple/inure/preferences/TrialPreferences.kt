@@ -66,7 +66,7 @@ object TrialPreferences {
     }
 
     fun isFullVersion(): Boolean {
-        return SharedPreferences.getEncryptedSharedPreferences().getBoolean(IS_APP_FULL_VERSION_ENABLED, false)
+        return true
     }
 
     // ---------------------------------------------------------------------------------------------------------- //
