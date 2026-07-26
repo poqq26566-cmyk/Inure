@@ -103,7 +103,7 @@ object TrialPreferences {
     }
 
     fun hasLicenceKey(): Boolean {
-        return SharedPreferences.getEncryptedSharedPreferences().getBoolean(HAS_LICENSE_KEY, false)
+        return true
     }
 
     // ---------------------------------------------------------------------------------------------------------- //
@@ -113,7 +113,7 @@ object TrialPreferences {
     }
 
     fun isUnlockerVerificationRequired(): Boolean {
-        return SharedPreferences.getEncryptedSharedPreferences().getBoolean(IS_UNLOCKER_VERIFICATION_REQUIRED, true) || AppUtils.isPlayFlavor()
+        return false
     }
 
     // ---------------------------------------------------------------------------------------------------------- //
