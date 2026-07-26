@@ -51,7 +51,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "app.simple.inure"
+        applicationId "app.simple.inure.selfbuild"
         minSdkVersion 23
         targetSdkVersion 36
         versionCode 10720
