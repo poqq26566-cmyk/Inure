@@ -26,19 +26,27 @@ object LocaleUtils {
         }
     }
 
-    fun isOneOfTraditionalChinese(): Boolean {
-        return with(getSystemLanguageCode()) {
-            this == "zh" ||
-                    this == "zh-HK" ||
-                    this == "zh-MO" ||
-                    this == "zh-TW" ||
-                    this == "zh-Hant" ||
-                    this == "zh-Hant-HK" ||
-                    this == "zh-Hant-MO" ||
-                    this == "zh-Hant-TW" ||
-                    this == "zh-Hant-CN" ||
-                    this == "zh-Hant-SG"
+    fun getSystemLocale(): Locale {
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            Resources.getSystem().configuration.locales[0]
+        } else {
+            @Suppress("deprecation")
+            Resources.getSystem().configuration.locale
         }
+    }
+
+    fun isOneOfTraditionalChinese(): Boolean {
+        val locale = getSystemLocale()
+
+        if (locale.language != "zh") {
+            return false
+        }
+
+        // A bare "zh" language code (which is what most Simplified-Chinese devices/ROMs,
+        // mainland China included, actually report) does NOT by itself mean Traditional —
+        // only the specific Traditional-using regions/script tag do. Checking just the
+        // language prefix here was misclassifying plain Simplified Chinese as Traditional.
+        return locale.country in arrayOf("TW", "HK", "MO") || locale.script == "Hant"
     }
 
     /**
